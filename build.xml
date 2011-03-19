@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Kinode" default="dist">
+
+    <property name="src" value="src"/>
+    <property name="lib" value="lib"/>
+    <property name="build" value="build"/>
+    <property name="dist" value="dist"/>
+    <property name="lib.scenebuilder" value="../scenebuilder/dist"/>
+
+    <path id="build.classpath">
+        <path path="${lib.scenebuilder}/nodebox-core.jar"/>
+        <path path="${lib.scenebuilder}/processing-core.jar"/>
+        <path path="${lib.scenebuilder}/equinox.jar"/>
+    </path>
+
+    <target name="init">
+        <mkdir dir="${build}"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <javac srcdir="${src}" destdir="${build}" classpathref="build.classpath" source="1.5" target="1.5"/>
+    </target>
+
+    <target name="embed-dependencies" depends="init">
+        <copy file="${lib}/libKinect.jnilib" todir="${build}"/>
+    </target>
+
+    <target name="dist" depends="compile,embed-dependencies">
+        <mkdir dir="${dist}"/>
+        <jar jarfile="${dist}/kinode.jar" basedir="${build}" manifest="manifest.mf"/>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build}"/>
+        <delete dir="${dist}"/>
+    </target>
+
+</project>

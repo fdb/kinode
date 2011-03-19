@@ -1,0 +1,14 @@
+Kinect node for SceneBuilder (https://github.com/nodebox/scenebuilder).
+
+Uses the openkinect library by Daniel Shiffman (https://github.com/shiffman/libfreenect/).
+
+All code, except for the code by Shiffman (src/org/openkinect) is in the public domain.
+
+To build:
+
+ant dist
+
+Authors:
+
+Frederik De Bleser <frederik@burocrazy.com>
+Lieven Menschaert <lievenmenschaert@gmail.com>
