@@ -5,4 +5,4 @@ Bundle-Name: Kinode
 Bundle-Version: 1.0.0
 Import-Package: org.osgi.framework, processing.core, nodebox.node, nodebox.util
 Bundle-NativeCode: libKinect.jnilib
-Export-Node: kinode.KinectNode
+Export-Node: kinode.PointTracker

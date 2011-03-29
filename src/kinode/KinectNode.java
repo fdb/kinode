@@ -4,21 +4,18 @@ package kinode;
 import nodebox.node.*;
 import org.openkinect.processing.Kinect;
 
-@Description("Draw the Kinect depth image.")
-@Drawable
-@Category("Hardware")
-public class KinectNode extends Node {
+public abstract class KinectNode extends Node {
 
-    private Kinect kinect;
+    public static final int KINECT_IMAGE_WIDTH = 640;
+    public static final int KINECT_IMAGE_HEIGHT = 480;
+
+    protected Kinect kinect;
     public final FloatPort pTilt = new FloatPort(this, "tilt", Port.Direction.INPUT, 15f);
 
     @Override
     public void initialize() {
         kinect = new Kinect(getScene().getApplet());
         kinect.start();
-        kinect.enableDepth(true);
-        kinect.enableRGB(true);
-        kinect.processDepthImage(true);
     }
 
     @Override
@@ -29,11 +26,6 @@ public class KinectNode extends Node {
     }
 
     @Override
-    public void draw(processing.core.PGraphics g, Context context, float dt) {
-        g.image(kinect.getDepthImage(), 0, 0);
-    }
-
-    @Override
     public void destroy() {
         kinect.quit();
         kinect = null;
@@ -41,9 +33,11 @@ public class KinectNode extends Node {
 
     @Override
     protected void finalize() throws Throwable {
+        super.finalize();
         if (kinect != null) {
             kinect.quit();
             kinect = null;
         }
     }
+
 }
